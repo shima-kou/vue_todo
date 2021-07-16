@@ -7,7 +7,7 @@
       </button>
     </div>
     <transition name="fade">
-      <p v-if="isShow === true && text === ''">テキストが入力されていません。</p>
+      <p class="note" v-if="isShow === true && text === ''">テキストが入力されていません。</p>
     </transition>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
     };
   },
   props: {
-    list: {
+    todos: {
       type: Array,
       default: () => [],
     },
@@ -36,7 +36,7 @@ export default {
         return;
       }
       const row = {
-        id: this.$props.list.length + 1,
+        id: this.$props.todos.length + 1,
         text: this.text,
         status: this.status,
       };

@@ -8,34 +8,14 @@
         <th></th>
       </tr>
     </thead>
-    <tbody v-if="mode === '全て'">
-      <tr v-for="(tr, n) in list" v-bind:key="n">
-        <td>{{ tr.id }}</td>
-        <td>{{ tr.text }}</td>
+    <tbody>
+      <tr v-for="(todo, index) in filteredTodos(mode)" v-bind:key="index">
+        <td>{{ todo.id }}</td>
+        <td>{{ todo.text }}</td>
         <td>
-          <button class="status_button" v-on:click="statusBtn" v-bind:data-id="tr.id" v-bind:status="tr.status">{{ tr.status }}</button>
+          <button class="status_button" v-on:click="statusBtn(todo.id)" v-bind:status="todo.status">{{ todo.status }}</button>
         </td>
-        <td><button class="delete_button" v-on:click="deleteBtn" v-bind:data-id="tr.id">削除</button></td>
-      </tr>
-    </tbody>
-    <tbody v-if="mode === '作業中'">
-      <tr v-for="(tr, n) in filteredWorking" v-bind:key="n">
-        <td>{{ tr.id }}</td>
-        <td>{{ tr.text }}</td>
-        <td>
-          <button class="status_button" v-on:click="statusBtn" v-bind:data-id="tr.id" v-bind:status="tr.status">{{ tr.status }}</button>
-        </td>
-        <td><button class="delete_button" v-on:click="deleteBtn" v-bind:data-id="tr.id">削除</button></td>
-      </tr>
-    </tbody>
-    <tbody v-if="mode === '完了'">
-      <tr v-for="(tr, n) in filteredComplete" v-bind:key="n">
-        <td>{{ tr.id }}</td>
-        <td>{{ tr.text }}</td>
-        <td>
-          <button class="status_button" v-on:click="statusBtn" v-bind:data-id="tr.id" v-bind:status="tr.status">{{ tr.status }}</button>
-        </td>
-        <td><button class="delete_button" v-on:click="deleteBtn" v-bind:data-id="tr.id">削除</button></td>
+        <td><button class="delete_button" v-on:click="deleteBtn(todo.id)">削除</button></td>
       </tr>
     </tbody>
   </table>
@@ -45,7 +25,7 @@
 export default {
   name: 'TodoTable',
   props: {
-    list: {
+    todos: {
       type: Array,
       default: () => [],
     },
@@ -53,20 +33,22 @@ export default {
       type: String,
     },
   },
-  computed: {
-    filteredWorking() {
-      return this.list.filter((li) => li.status === '作業中');
-    },
-    filteredComplete() {
-      return this.list.filter((li) => li.status === '完了');
-    },
-  },
+  computed: {},
   methods: {
-    statusBtn(event) {
-      this.$emit('statusBtn', event.currentTarget.getAttribute('data-id'));
+    statusBtn(id) {
+      this.$emit('statusBtn', id);
     },
-    deleteBtn(event) {
-      this.$emit('deleteBtn', event.currentTarget.getAttribute('data-id'));
+    deleteBtn(id) {
+      this.$emit('deleteBtn', id);
+    },
+    filteredTodos(status) {
+      if (status === '作業中') {
+        return this.todos.filter((todo) => todo.status === '作業中');
+      }
+      if (status === '完了') {
+        return this.todos.filter((todo) => todo.status === '完了');
+      }
+      return this.todos;
     },
   },
 };
