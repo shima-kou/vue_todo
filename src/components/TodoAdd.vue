@@ -7,7 +7,7 @@
       </button>
     </div>
     <transition name="fade">
-      <p class="note" v-if="isShow === true && text === ''">テキストが入力されていません。</p>
+      <p class="note" v-if="isShow && !text">テキストが入力されていません。</p>
     </transition>
   </div>
 </template>
