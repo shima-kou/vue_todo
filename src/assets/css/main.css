@@ -1,0 +1,67 @@
+@import './_reset.css';
+
+body {
+  padding: 50px;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+}
+
+ul {
+  text-align: left;
+  list-style: none;
+  margin: 20px 0 30px;
+}
+
+ul > li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+table {
+  margin: 0 0 30px;
+  border-color: #000;
+  border-spacing: 0;
+  border-left: 1px solid;
+  border-bottom: 1px solid;
+}
+
+table th,
+table td {
+  border-top: 1px solid;
+  border-right: 1px solid;
+  border-color: #000;
+  padding: 10px;
+}
+
+.ui_wrap {
+  text-align: left;
+}
+
+.ui_wrap h2 {
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+.ui_wrap input {
+  padding: 5px 10px;
+  box-sizing: border-box;
+  margin-right: 8px;
+}
+
+label {
+  font-size: 16px;
+  line-height: 1.5;
+}
+input[type='radio'] {
+  margin: 0 5px 0 0;
+}
+
+.note {
+  font-size: 14px;
+  color: red;
+  margin-top: 10px;
+}
